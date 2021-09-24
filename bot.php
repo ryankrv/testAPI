@@ -1,10 +1,31 @@
 <?php 
     include 'config.php';
     $t = "\e[97m";
+    //warna
     $merah = "\e[91m";
-    echo $merah."BOT Go Novel Bye Ryan \n".$t;
+    $kuning = "\e[33m";
+    $hijau = "\e[32m";
+
+    //Header 
+    echo $kuning.
+    "    ____     ____   _______ \n".
+    "   |  _ \   / __ \ |__   __| \n".
+    "   | |_) | | |  | |   | |\n".
+    "   |  _ <  | |  | |   | |\n".
+    "   | |_) | | |__| |   | |\n".
+    "   |____/   \____/    |_| ".$hijau."Versi 1.0\n".$t;
+    echo $hijau.
+    "--- BOT Go Novel By Aero-Gang --- \n\n".$t;
+
+    echo 
+    $merah."Disclaimer: \n".$t.
+    "- Resiko Di Tanggung Sendiri \n".
+    "- Menggunaka Bot Sama Saja Meggunakan Cara Ilegal \n".
+    "\n";
+    //Requset
     $urel = 'https://api.igonovel.com/v1/me/info';
 
+    //Fungsi
     function get($url){
         global $uid, $token, $timestamp;
         $ch = curl_init();
@@ -45,10 +66,12 @@
 
 
     if($data['status'] == 1){
-        
+        echo "Status Login:".$hijau." Berhasil Login"."\n".$t;
         echo "Nama Akun: ".$data['data']['nickname']."\n";
+        echo "Jumlah Koin: ".$data['data']['coin']."\n";
     }
     else{
-        echo "Status: ".$data['msg']."\n";
+        echo "Status Login:".$merah." Gagal Login"."\n".$t;
+        echo "Pesan: ".$kuning.$data['msg']."\n".$t;
     }
     ?>
