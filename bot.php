@@ -255,10 +255,11 @@
                         $rebod = '';
                         //cek jumlah chest dan siapkan Execute;
                         if($bykces != 0){
+                            $totalces = $bykces;
                             $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t."\n");
                             $bukces = bukachest($bchest, $rebod);
                             $openchest = json_decode($bukces, TRUE);
-                            while($bykces != 0){
+                            while($totalces != 0){
                                 echo "Membuka Chest Dalam : ";
                                 for($waktu = 5; $waktu > 0; $waktu--){
                                     echo $waktu;
@@ -268,15 +269,15 @@
                                         echo chr(8);
                                     }
                                 }
-                                if($openchest['status'] == 1){
-                                    echo " + ".$openchest['data']['num']."\n";
-                                    $getchest1 = cekchest($chest);
-                                    $chstot1 =  json_decode($getchest1, TRUE);
-                                    $bykces = $chstot1['data']['chest_num'];
+                                if($openchest['status'] != 1){
+                                    echo $merah."Tidak Ada Chest Yang Tersedia \n".$t;
+                                    exit();
                                 }
                                 else{
-                                    echo $merah."Gagal Membuka Chest \n".$t;
-                                    exit();
+                                    echo " + ".$openchest['data']['num']."\n";
+                                    $ceklagi = cekchest($chest);
+                                    $chstot1 =  json_decode($ceklagi, TRUE);
+                                    $totalces = $chstot1['data']['chest_num'];
                                 }
                             }
                             
@@ -314,9 +315,9 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
-                        echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n".$t;
-                        echo "[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n";
-                        echo $normal."---------------------------------------------\n";
+                        echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
+                        echo "[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
+                        echo $normal."---------------------------------------------\n\n";
                         echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
@@ -337,13 +338,15 @@
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
                             if($claim['status'] != 1){
-                                echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
+                                echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
+                                echo "Status : ".$claim['msg'];
                                 exit();
                             }
                             else{
                                 echo $hijau."\nBerhasil Claim Chest\n".$t;
                             }
                             $cdstat = $newcd1['status'];
+                            $cekwaktu = 0;
                         }
                     }
                 }
