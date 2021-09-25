@@ -99,7 +99,7 @@
         return $response_json;
     }
 
-    function bukachest($url){
+    function bukachest($url, $rebody){
         global $uid, $token, $timestamp;
         $ch = curl_init();
         //set URL
@@ -127,7 +127,7 @@
         ];
         
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "type=2&".$timestamp); 
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $rebody); 
         $response_json = curl_exec($ch);
         curl_close($ch);
         return $response_json;
@@ -210,7 +210,8 @@
                         $rebod = '';
                         //cek jumlah chest dan siapkan Execute;
                         if($bykces != 0){
-                            $bukces = bukachest($bchest);
+                            $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t);
+                            $bukces = bukachest($bchest, $rebod);
                             $openchest = json_decode($bukces, TRUE);
                             while($bykces != 0){
                                 echo "Membuka Chest Dalam : ";
