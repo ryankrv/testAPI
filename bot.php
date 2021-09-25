@@ -7,6 +7,7 @@
     $hijau = "\e[32m";
     $bold = "\e[1m";
     $normal = "\e[0m";
+    $biru = "\e[34m";
     
 
     //Header 
@@ -296,11 +297,12 @@
             }
             if($pilihan == 2){
                 if($pr['status'] != 1){
-                    echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
+                    echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
+                    echo "Status : ".$pr['msg'];
                     exit();
                 }
                 else{
-                    echo $kuning."[*] Memeriksa Ketersedian Chest \n";
+                    echo $biru."[*] Memeriksa Ketersedian Chest \n";
                     echo "Total Chest Terklaim : ".$hijau. $cd['data']['total'].$t."\n";
                     echo "---------------------------------------------\n";
                     $cdstat = $cd['status'];
@@ -312,7 +314,9 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
-                        echo $kuning."Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n".$t;
+                        echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n".$t;
+                        echo "[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n";
+                        echo $normal."---------------------------------------------\n";
                         echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
@@ -332,8 +336,6 @@
                             }
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
-                            $cdnew2 = countchest($wak);
-                            $newcd2 = json_decode($cdnew2, TRUE);
                             if($claim['status'] != 1){
                                 echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
                                 exit();
@@ -341,8 +343,7 @@
                             else{
                                 echo $hijau."\nBerhasil Claim Chest\n".$t;
                             }
-                            
-                            $cdstat = $newcd2['status'];
+                            $cdstat = $newcd1['status'];
                         }
                     }
                 }
