@@ -295,7 +295,11 @@
                 }
             }
             if($pilihan == 2){
-                if($pr['status'] == 1){
+                if($pr['status'] != 1){
+                    echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
+                    exit();
+                }
+                else{
                     echo $kuning."[*] Memeriksa Ketersedian Chest \n";
                     echo "Total Chest Terklaim : ".$hijau. $cd['data']['total'].$t."\n";
                     echo "---------------------------------------------\n";
@@ -308,6 +312,7 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
+                        echo $kuning."Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n".$t;
                         echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
@@ -329,22 +334,17 @@
                             $claim = json_decode($ccss, TRUE);
                             $cdnew2 = countchest($wak);
                             $newcd2 = json_decode($cdnew2, TRUE);
-                            if($claim['status'] == 1){
-                                echo "\nBerhasil Claim Chest\n";
-                                echo "Total Chest Saat ini  : ".$hijau. $claim['data']['total_chest_num'].$t."\n"; 
-                                echo "Total Chest Terclaim  : ".$hijau. $claim['data']['totalChest'].$t."\n";
-                            }
-                            else{
+                            if($claim['status'] != 1){
                                 echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
                                 exit();
                             }
+                            else{
+                                echo $hijau."\nBerhasil Claim Chest\n".$t;
+                            }
+                            
                             $cdstat = $newcd2['status'];
                         }
                     }
-                }
-                else{
-                    echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
-                    exit();
                 }
             }
             if($pilihan == 3){
