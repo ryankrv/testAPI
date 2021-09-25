@@ -316,10 +316,11 @@
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
                         echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
-                        echo "[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
+                        echo $merah."[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
                         echo $normal."---------------------------------------------\n\n";
-                        echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
+                        
                         while($newcd['status'] == 1){
+                            echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
                             $waktu = $pglulg;
                             while($cekwaktu < $inicd){
                                 replaceOut($sisawaktu);
@@ -345,8 +346,12 @@
                             else{
                                 echo $hijau."\nBerhasil Claim Chest\n".$t;
                             }
-                            $cdstat = $newcd1['status'];
+                            $cdnew2 = countchest($wak);
+                            $newcd2 = json_decode($cdnew2, TRUE);
+                            $cdstat = $newcd2['status'];
                             $cekwaktu = 0;
+                            $sisawaktu = $newcd2['data']['count_down'];
+                            
                         }
                     }
                 }
