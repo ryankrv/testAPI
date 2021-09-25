@@ -152,8 +152,8 @@
             'qr-r: 0',
             'share-stamp: ',
             'share-text: ',
-            'Content-Type: application/x-www-form-urlencoded',
-            'Content-Length: 61',
+            //'Content-Type: application/x-www-form-urlencoded',
+            //'Content-Length: 61',
             'Host: api.igonovel.com',
             'Connection: Keep-Alive',
             'Accept-Encoding: gzip',
@@ -242,7 +242,8 @@
             echo 
             "1. Membuka Chest \n".
             "2. Claim Chest \n".
-            "3. Keluar Dari Bot \n";
+            "3. Force Claim Chest \n".
+            "4. Keluar Dari Bot \n";
             echo "---------------------------------------------\n";
             $pilihan = readline($hijau.'Ketik Nomor Menu Yang Akan Dijalankan : '.$t);
             echo "---------------------------------------------\n";
@@ -347,6 +348,18 @@
                 }
             }
             if($pilihan == 3){
+                echo "Force Claim Chest \n";
+                $ccss = ccs($cc);
+                $claim = json_decode($ccss, TRUE);
+                if($claim['status'] == 1){
+                    echo "Berhasil Claim Chest \n";
+                    exit();
+                }else{
+                    echo "Error : ".$merah.$claim['msg'].$t;
+                    exit();
+                }
+            }
+            if($pilihan == 4){
                 echo $bold.$merah."Keluar Dari Bot \n".$normal.$t;
                 exit();
             }
