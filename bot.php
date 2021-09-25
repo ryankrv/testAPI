@@ -144,7 +144,7 @@
     //
     $pr = json_decode($prof, TRUE);
     $chstot =  json_decode($getchest, TRUE);
-    $openchest = json_decode($bukces);
+    $openchest = json_decode($bukces, TRUE);
 
 
     if($pr['status'] == 1){
