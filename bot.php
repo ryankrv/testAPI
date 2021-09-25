@@ -299,7 +299,7 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
-                        echo "Mulai Claim Dalam : ";
+                        echo "Mulai Claim Dalam (CountDown update setiap 20 Detik) : \n";
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
                             while($cekwaktu < $inicd){
@@ -314,7 +314,7 @@
                             $cdnew2 = countchest($wak);
                             $newcd2 = json_decode($cdnew2, TRUE);
                             if($claim['status'] == 1){
-                                echo "Berhasil Claim Chest\n";
+                                echo "\nBerhasil Claim Chest\n";
                                 echo "Total Chest Saat ini  : ".$hijau. $claim['data']['total_chest_num'].$t."\n"; 
                                 echo "Total Chest Terclaim  : ".$hijau. $claim['data']['totalChest'].$t."\n";
                             }
