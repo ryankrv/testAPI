@@ -307,7 +307,7 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
-                        echo "Mulai Claim Dalam (CountDown update setiap 20 Detik) : \n";
+                        echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
                             while($cekwaktu < $inicd){
@@ -319,7 +319,7 @@
                                 $cekwaktu += $waktu;
                                 if($newcd1['status'] != 1){
                                     echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
-                                    echo "Silahkan Ganti Request Body 1 \n"."
+                                    echo "Silahkan Ganti Request Body 1\n"."
                                     Status : ".$newcd1['msg']."\n";
                                     exit();
                                 }
@@ -343,12 +343,12 @@
                 }
                 else{
                     echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
-                    $pilih = 2;
+                    exit();
                 }
             }
             if($pilihan == 3){
                 echo $bold.$merah."Keluar Dari Bot \n".$normal.$t;
-                $pilih = 2;
+                exit();
             }
         }
 
@@ -360,5 +360,6 @@
         echo "---------------------------------------------\n";
         echo "Status Login :".$merah." Gagal Login"."\n".$t;
         echo "---------------------------------------------\n";
+        exit();
     }
     ?>
