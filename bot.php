@@ -282,7 +282,7 @@
             if($pilihan == 2){
                 if($pr['status'] == 1){
                     echo $kuning."[*] Memeriksa Ketersedian Chest \n";
-                    echo "Total Chest Terklaim : ".$hijau. $sisa.$t."\n";
+                    echo "Total Chest Terklaim : ".$hijau. $cd['data']['total'].$t."\n";
                     echo "---------------------------------------------\n";
                     $cdstat = $cd['status'];
                     while($cdstat == 1){
