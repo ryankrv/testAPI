@@ -306,11 +306,13 @@
                                 replaceOut($sisawaktu);
                                 sleep($waktu);
                                 $cdnew1 = countchest($wak);
-                                $newcd = json_decode($cdnew, TRUE);
+                                $newcd1 = json_decode($cdnew1, TRUE);
                                 $sisawaktu -= $waktu;
                                 $cekwaktu += $waktu;
-                                if($newcd['status'] != 1){
-                                    echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
+                                if($newcd1['status'] != 1){
+                                    echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
+                                    echo "Silahkan Ganti Request Body 1 \n"."
+                                    Status : ".$newcd1['msg']."\n";
                                     exit();
                                 }
                             }
