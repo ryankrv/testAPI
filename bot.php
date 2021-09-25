@@ -268,10 +268,13 @@
                                 }
                                 if($openchest['status'] == 1){
                                     echo " + ".$openchest['data']['num']."\n";
+                                    $getchest1 = cekchest($chest);
+                                    $chstot1 =  json_decode($getchest, TRUE);
+                                    $bykces = $chstot1['data']['chest_num'];
                                 }
                                 else{
                                     echo $merah."Gagal Membuka Chest \n".$t;
-                                    $bykces = 0;
+                                    exit();
                                 }
                             }
                         }
@@ -295,7 +298,7 @@
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
                         $inicd = $newcd['data']['count_down'];
-                        $pglulg = 20;
+                        $pglulg = 10;
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
