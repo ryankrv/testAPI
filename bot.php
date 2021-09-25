@@ -126,5 +126,32 @@
         echo "Pesan        : ".$kuning.$pr['msg']."\n".$t;
         echo "---------------------------------------------\n";
 
+        $pilih = 1;
+        
+        if($pilih == 1){
+            echo $kuning.$bold."Menu Bot".$normal.$t."\n";
+            echo 
+            "1. Membuka Chest \n".
+            "2. Claim Chest \n".
+            "3. Keluar Bot \n";
+            $pilihan = readline($hijau.'Ketik Nomor Menu Yang Akan Dijalankan : '.$t);
+            if($pilihan == 1){
+                echo "nomor 1 \n";
+                for($waktu = 5; $waktu > 0; $waktu--){
+                    echo $waktu;
+                    sleep(1);
+                    echo chr(8);
+                }
+            }
+            if($pilihan == 2){
+                echo "Nomor 2 \n".$pilih;
+            }
+            if($pilihan == 3){
+                echo "Keluar Bot \n";
+                $pilih = 2;
+            }
+        }
+
+
     }
     ?>
