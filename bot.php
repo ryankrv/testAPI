@@ -281,21 +281,24 @@
             }
             if($pilihan == 2){
                 if($cd['status'] == 1){
-                    //$waktu = $cd['data']['count_down'];
+                    $waktu = $cd['data']['count_down'];
+                    $sisa = $cd['data']['total'];
                     echo $kuning."[*] Memeriksa Ketersedian Chest \n";
-                    echo "Total Chest  : ".$hijau. $cd['data']['total'].$t."\n";
+                    echo "Total Chest  : ".$hijau. $sisa.$t."\n";
                     echo "---------------------------------------------\n";
                     echo "Mulai Claim Dalam : ";
-                    for($waktu = 5; $waktu > 0; $waktu--){
-                        echo $waktu;
-                        sleep(1);
-                        $pjg = strlen($waktu);
-                        for ($pjg; $pjg > 0; $pjg--){
-                            echo chr(8);
+                    while($sisa > 0){
+                        for($waktu; $waktu > 0; $waktu--){
+                            echo $waktu;
+                            sleep(1);
+                            $pjg = strlen($waktu);
+                            for ($pjg; $pjg > 0; $pjg--){
+                                echo chr(8);
+                            }
                         }
+                        echo "\n";
+                        echo "Sisa Chest  : ".$hijau. $cd['data']['total'].$t."\n";
                     }
-                    echo "Gasken";
-
                 }
                 else{
                     echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
