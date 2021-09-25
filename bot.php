@@ -213,13 +213,13 @@
     //ke server
     $prof = get($profil);
     $getchest = cekchest($chest);
-    $ccss = ccs($cc);
+    
     $wakk = countchest($wak);
     //
     $pr = json_decode($prof, TRUE);
     $chstot =  json_decode($getchest, TRUE);
     $cd = json_decode($wakk, TRUE);
-    $claim = json_decode($ccss, TRUE);
+    
 
 
     if($pr['status'] == 1){
@@ -280,24 +280,39 @@
                 }
             }
             if($pilihan == 2){
-                if($cd['status'] == 1){
-                    $waktu = $cd['data']['count_down'];
-                    $sisa = $cd['data']['total'];
+                if($pr['status'] == 1){
                     echo $kuning."[*] Memeriksa Ketersedian Chest \n";
-                    echo "Total Chest  : ".$hijau. $sisa.$t."\n";
+                    echo "Total Chest Terklaim : ".$hijau. $sisa.$t."\n";
                     echo "---------------------------------------------\n";
-                    echo "Mulai Claim Dalam : ";
-                    while($sisa > 0){
-                        for($waktu; $waktu > 0; $waktu--){
-                            echo $waktu;
-                            sleep(1);
-                            $pjg = strlen($waktu);
-                            for ($pjg; $pjg > 0; $pjg--){
-                                echo chr(8);
+                    $cdstat = $cd['status'];
+                    while($cdstat == 1){
+                        $cdnew = countchest($wak);
+                        $newcd = json_decode($cdnew, TRUE);
+                        $waktu = $newcd['data']['count_down'];
+                        $sisa = $newcd['data']['total'];
+                        echo "Mulai Claim Dalam : ";
+                        while($newcd['status'] == 1){
+                            for($waktu; $waktu > 0; $waktu--){
+                                echo $waktu;
+                                sleep(1);
+                                $pjg = strlen($waktu);
+                                for ($pjg; $pjg > 0; $pjg--){
+                                    echo chr(8);
+                                }
                             }
+                            $ccss = ccs($cc);
+                            $claim = json_decode($ccss, TRUE);
+                            if($claim['status'] == 1){
+                                echo "Berhasil Claim Chest\n";
+                                echo "Total Chest Saat ini  : ".$hijau. $claim['data']['total_chest_num'].$t."\n"; 
+                                echo "Total Chest Terclaim  : ".$hijau. $claim['data']['totalChest'].$t."\n";
+                            }
+                            else{
+                                echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
+                                $pilih = 2;
+                            }
+                            $cdstat = $newcd['status'];
                         }
-                        echo "\n";
-                        echo "Sisa Chest  : ".$hijau. $cd['data']['total'].$t."\n";
                     }
                 }
                 else{
