@@ -116,18 +116,8 @@
         echo "Nama Akun    : ".$pr['data']['nickname']."\n";
         echo "Jumlah Koin  : ".$pr['data']['coin']."\n";
         echo "---------------------------------------------\n";
-        echo $bold.$hijau."Cek Chest\n".$normal.$t;
-        echo "Total Chest : ".$chstot['data']['chest_num']."\n";
-        
-    }
-    else{
-        echo "---------------------------------------------\n";
-        echo "Status Login :".$merah." Gagal Login"."\n".$t;
-        echo "Pesan        : ".$kuning.$pr['msg']."\n".$t;
-        echo "---------------------------------------------\n";
 
         $pilih = 1;
-        
         if($pilih == 1){
             echo $kuning.$bold."Menu Bot".$normal.$t."\n";
             echo 
@@ -136,11 +126,15 @@
             "3. Keluar Bot \n";
             $pilihan = readline($hijau.'Ketik Nomor Menu Yang Akan Dijalankan : '.$t);
             if($pilihan == 1){
-                echo "nomor 1 \n";
-                for($waktu = 5; $waktu > 0; $waktu--){
-                    echo $waktu;
-                    sleep(1);
-                    echo chr(8);
+                echo "---------------------------------------------\n";
+                echo $bold.$hijau."Cek Chest\n".$normal.$t;
+                echo "Total Chest : ".$chstot['data']['chest_num']."\n";
+                if($chstot['data']['chest_num'] != 0){
+                    for($waktu = 5; $waktu > 0; $waktu--){
+                        echo "Membuka Chest Dalam ".$waktu;
+                        sleep(1);
+                        echo chr(8);
+                    }
                 }
             }
             if($pilihan == 2){
@@ -153,5 +147,11 @@
         }
 
 
+        
+    }
+    else{
+        echo "---------------------------------------------\n";
+        echo "Status Login :".$merah." Gagal Login"."\n".$t;
+        echo "---------------------------------------------\n";
     }
     ?>
