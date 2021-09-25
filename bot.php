@@ -306,8 +306,13 @@
                                 replaceOut($sisawaktu);
                                 sleep($waktu);
                                 $cdnew1 = countchest($wak);
+                                $newcd = json_decode($cdnew, TRUE);
                                 $sisawaktu -= $waktu;
                                 $cekwaktu += $waktu;
+                                if($newcd['status'] != 1){
+                                    echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
+                                    exit();
+                                }
                             }
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
@@ -320,7 +325,7 @@
                             }
                             else{
                                 echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
-                                $pilih = 2;
+                                exit();
                             }
                             $cdstat = $newcd2['status'];
                         }
