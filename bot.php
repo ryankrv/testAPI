@@ -199,6 +199,12 @@
         return $response_json;
     }
 
+    function replaceOut($str)
+    {
+        $numNewLines = substr_count($str, "\n");
+        echo chr(27) . "[0G"; // Set cursor to first column
+        echo $str;
+    }
     
 
     //Requset
@@ -288,20 +294,25 @@
                     while($cdstat == 1){
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
-                        $waktu = $newcd['data']['count_down'];
+                        $inicd = $newcd['data']['count_down'];
+                        $pglulg = 20;
+                        $cekwaktu = 0;
+                        $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
                         echo "Mulai Claim Dalam : ";
                         while($newcd['status'] == 1){
-                            for($waktu; $waktu > 0; $waktu--){
-                                echo $waktu;
-                                sleep(1);
-                                $pjg = strlen($waktu);
-                                for ($pjg; $pjg > 0; $pjg--){
-                                    echo chr(8);
-                                }
+                            $waktu = $pglulg;
+                            while($cekwaktu < $inicd){
+                                replaceOut($sisawaktu);
+                                sleep($waktu);
+                                $cdnew1 = countchest($wak);
+                                $sisawaktu -= $waktu;
+                                $cekwaktu += $waktu;
                             }
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
+                            $cdnew2 = countchest($wak);
+                            $newcd2 = json_decode($cdnew2, TRUE);
                             if($claim['status'] == 1){
                                 echo "Berhasil Claim Chest\n";
                                 echo "Total Chest Saat ini  : ".$hijau. $claim['data']['total_chest_num'].$t."\n"; 
@@ -311,7 +322,7 @@
                                 echo $bold.$merah."Gagal Claim Chest, Silahkan Ganti Request Body 1 \n".$normal.$t;
                                 $pilih = 2;
                             }
-                            $cdstat = $newcd['status'];
+                            $cdstat = $newcd2['status'];
                         }
                     }
                 }
