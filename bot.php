@@ -253,7 +253,7 @@
                         $rebod = '';
                         //cek jumlah chest dan siapkan Execute;
                         if($bykces != 0){
-                            $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t);
+                            $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t."\n");
                             $bukces = bukachest($bchest, $rebod);
                             $openchest = json_decode($bukces, TRUE);
                             while($bykces != 0){
@@ -269,7 +269,7 @@
                                 if($openchest['status'] == 1){
                                     echo " + ".$openchest['data']['num']."\n";
                                     $getchest1 = cekchest($chest);
-                                    $chstot1 =  json_decode($getchest, TRUE);
+                                    $chstot1 =  json_decode($getchest1, TRUE);
                                     $bykces = $chstot1['data']['chest_num'];
                                 }
                                 else{
@@ -277,6 +277,11 @@
                                     exit();
                                 }
                             }
+                            
+                        }
+                        else{
+                            echo $merah."Tidak Ada Lagi Chest Yang Bisa Dibuka \n".$t;
+                            exit(); 
                         }
                     
                     }
