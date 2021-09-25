@@ -20,13 +20,14 @@
     echo $hijau.
     "--- BOT Go Novel By Aero-Gang --- \n\n".$t;
 
+    
     echo 
-    $merah."Disclaimer: \n".$t.
+    $merah.$bold."Disclaimer: \n".$normal.$t.
     "- Resiko Di Tanggung Sendiri \n".
     "- Menggunaka Bot Sama Saja Meggunakan Cara Ilegal \n".
     "\n";
     
-    $timestamp = readline("Masukkan timeStam & apiSign : ");
+    $timestamp = readline($bold.$kuning."Masukkan timeStam & apiSign : ".$normal.$t);
     //Fungsi
     function get($url){
         global $uid, $token, $timestamp;
