@@ -313,7 +313,7 @@
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
                         $inicd = $newcd['data']['count_down'];
-                        $pglulg = 10;
+                        $pglulg = 13;
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
@@ -369,7 +369,7 @@
                             }
                             else{
                                 echo $hijau."\nBerhasil Claim Chest\n".$t;
-                                echo $kuning."Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n".$t;
+                                echo $kuning."Mulai Claim Dalam : \n".$t;
                             }
                             sleep(10);
                             $cdnew2 = countchest($wak);
