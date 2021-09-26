@@ -319,9 +319,26 @@
                         echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
                         echo $merah."[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
                         echo $normal."---------------------------------------------\n\n";
-                        echo $kuning."Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n".$t;
+                        echo $kuning."Mulai Claim Dalam: \n".$t;
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
+                            for($sisawaktu; $sisawaktu > 0; $sisawaktu--){
+                                replaceOut($sisawaktu);
+                                $modwaktu = $sisawaktu % $pglulg;
+                                if($modwaktu == 0){
+                                    $cdnew1 = countchest($wak);
+                                    $newcd1 = json_decode($cdnew1, TRUE);
+                                    if($newcd1['status'] != 1){
+                                        echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
+                                        echo "Silahkan Ganti Request Body 1\n";
+                                        echo "Status : ".$newcd1['msg']."\n";
+                                        exit();
+                                    }
+                                }
+                                sleep(1);
+                            }                            
+
+                            /*
                             while($cekwaktu < $inicd){
                                 replaceOut($sisawaktu);
                                 sleep($waktu);
@@ -336,6 +353,7 @@
                                     exit();
                                 }
                             }
+                            */
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
                             if($claim['status'] != 1){
