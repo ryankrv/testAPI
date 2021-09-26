@@ -204,7 +204,7 @@
     {
         $numNewLines = substr_count($str, "\n");
         echo chr(27) . "[0G"; // Set cursor to first column
-        echo $hijau.$str.$t;
+        echo $str;
     }
     
 
@@ -312,7 +312,7 @@
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
                         $inicd = $newcd['data']['count_down'];
-                        $pglulg = 10;
+                        $pglulg = 30;
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
