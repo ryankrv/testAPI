@@ -332,7 +332,7 @@
                                     $cdnew1 = countchest($wak);
                                     $newcd1 = json_decode($cdnew1, TRUE);
                                     if($newcd1['status'] != 1){
-                                        echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
+                                        echo $bold.$merah."\nGagal Claim Chest\n".$normal.$t;
                                         echo "Silahkan Ganti Request Body 1\n";
                                         echo "Status : ".$newcd1['msg']."\n";
                                         exit();
@@ -357,10 +357,12 @@
                                 }
                             }
                             */
+                            echo $bold.$hijau."\nMencoba Mengclaim Chest : \n".$normal.$t;
+                            sleep(5);
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
                             if($claim['status'] != 1){
-                                echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
+                                echo $bold.$merah."\nGagal Claim Chest\n".$normal.$t;
                                 echo "Status : ".$claim['msg'];
                                 exit();
                             }
