@@ -241,8 +241,8 @@
         while($pilih == 1){
             echo $kuning.$bold."Menu Bot".$normal.$t."\n";
             echo 
-            "1. Membuka Chest \n".
-            "2. Claim Chest \n".
+            "1. Auto Buka Chest \n".
+            "2. Auto Claim Chest \n".
             "3. Force Claim Chest \n".
             "4. Keluar Dari Bot \n";
             echo "---------------------------------------------\n";
@@ -317,8 +317,9 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
-                        echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
+                        echo $kuning."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
                         echo $merah."[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
+                        echo $biru."[!] Claim Akan Berhenti jika total detik semua claim lebih dari 500 (Limit Request Dari Server Go Novel). Jadi Cari Request Body Baru\n".$t;
                         echo $normal."---------------------------------------------\n\n";
                         echo $kuning."Memeriksa Chest  \n".$t;
                         sleep(5);
@@ -382,7 +383,13 @@
                 }
             }
             if($pilihan == 3){
-                echo "Force Claim Chest \n";
+                echo $hijau.$bold."Metode Force Claim Chest \n".$t.$normal;
+                echo $kuning.$bold."[!] Metode Ini Berguna Agak Kita Tidak Perlu Membaca Di Go Novel\n".$t.$normal;
+                echo $kuning.$bold."[!] Kapan Menggunakan Metode Ini?\n".$t.$normal;
+                echo "[1] Saat Count Down Claim lebih Dari 500 Detik\n";
+                echo "[1] Sesuaikan Jarak Waktu Force Claim Dengan Waktu Cek (Misal Saat Cek Claim ke-2 ternyata Muncul 800 Detik( 13 Menitan))\n";
+                echo"     Jadi Kita Barus Bisa Sukses Force Claim 13 Menit Kedepan. Jangan Gunakan Auto Claim Karena Tidak Langsung Claim (Harus Nunggu 13 Menit Dlu, Keburu Expire Requestnya). \n";
+
                 $ccss = ccs($cc);
                 $claim = json_decode($ccss, TRUE);
                 if($claim['status'] == 1){
