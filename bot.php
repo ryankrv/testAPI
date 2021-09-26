@@ -387,16 +387,16 @@
                 echo $kuning.$bold."[!] Metode Ini Berguna Agak Kita Tidak Perlu Membaca Di Go Novel\n".$t.$normal;
                 echo $kuning.$bold."[!] Kapan Menggunakan Metode Ini?\n".$t.$normal;
                 echo "[1] Saat Count Down Claim lebih Dari 500 Detik\n";
-                echo "[1] Sesuaikan Jarak Waktu Force Claim Dengan Waktu Cek (Misal Saat Cek Claim ke-2 ternyata Muncul 800 Detik( 13 Menitan))\n";
-                echo"     Jadi Kita Barus Bisa Sukses Force Claim 13 Menit Kedepan. Jangan Gunakan Auto Claim Karena Tidak Langsung Claim (Harus Nunggu 13 Menit Dlu, Keburu Expire Requestnya). \n";
-
+                echo "[2] Sesuaikan Jarak Waktu Force Claim Dengan Waktu Cek (Misal Saat Cek Claim ke-2 ternyata Muncul 800 Detik( 13 Menitan)) Jadi Kita Barus Bisa Sukses Force Claim 13 Menit Kedepan. Jangan Gunakan Auto Claim Karena Tidak Langsung Claim (Harus Nunggu 13 Menit Dlu, Keburu Expire Requestnya). \n";
+                echo $normal."---------------------------------------------\n\n";
                 $ccss = ccs($cc);
                 $claim = json_decode($ccss, TRUE);
                 if($claim['status'] == 1){
-                    echo "Berhasil Claim Chest \n";
+                    echo $hijau."Berhasil Claim Chest \n".$t;
                     exit();
                 }else{
-                    echo "Error : ".$merah.$claim['msg'].$t;
+                    echo $merah."Gagal Claim Chest \n".$t;
+                    echo $kuning."Alasan : ".$merah.$claim['msg'].$t;
                     exit();
                 }
             }
