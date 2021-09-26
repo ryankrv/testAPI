@@ -204,7 +204,7 @@
     {
         $numNewLines = substr_count($str, "\n");
         echo chr(27) . "[0G"; // Set cursor to first column
-        echo $str;
+        echo $hijau.$str.$t;
     }
     
 
@@ -259,8 +259,8 @@
                             $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t."\n");
                             $bukces = bukachest($bchest, $rebod);
                             $openchest = json_decode($bukces, TRUE);
+                            echo "Membuka Chest Dalam : ";
                             while($totalces != 0){
-                                echo "Membuka Chest Dalam : ";
                                 for($waktu = 5; $waktu > 0; $waktu--){
                                     echo $waktu;
                                     sleep(1);
@@ -275,6 +275,7 @@
                                 }
                                 else{
                                     echo " + ".$openchest['data']['num']."\n";
+                                    sleep(10);
                                     $ceklagi = cekchest($chest);
                                     $chstot1 =  json_decode($ceklagi, TRUE);
                                     $totalces = $chstot1['data']['chest_num'];
@@ -318,9 +319,8 @@
                         echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
                         echo $merah."[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
                         echo $normal."---------------------------------------------\n\n";
-                        
+                        echo $kuning."Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n".$t;
                         while($newcd['status'] == 1){
-                            echo "Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n";
                             $waktu = $pglulg;
                             while($cekwaktu < $inicd){
                                 replaceOut($sisawaktu);
@@ -331,8 +331,8 @@
                                 $cekwaktu += $waktu;
                                 if($newcd1['status'] != 1){
                                     echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
-                                    echo "Silahkan Ganti Request Body 1\n"."
-                                    Status : ".$newcd1['msg']."\n";
+                                    echo "Silahkan Ganti Request Body 1\n";
+                                    echo "Status : ".$newcd1['msg']."\n";
                                     exit();
                                 }
                             }
@@ -345,7 +345,9 @@
                             }
                             else{
                                 echo $hijau."\nBerhasil Claim Chest\n".$t;
+                                echo $kuning."Mulai Claim Dalam (CountDown update setiap 10 Detik) : \n".$t;
                             }
+                            sleep(10);
                             $cdnew2 = countchest($wak);
                             $newcd2 = json_decode($cdnew2, TRUE);
                             $cdstat = $newcd2['status'];
