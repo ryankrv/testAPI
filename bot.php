@@ -308,6 +308,7 @@
                     echo "Total Chest Terklaim : ".$hijau. $cd['data']['total'].$t."\n";
                     echo "---------------------------------------------\n";
                     $cdstat = $cd['status'];
+                    sleep(5);
                     while($cdstat == 1){
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
