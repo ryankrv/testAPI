@@ -312,13 +312,15 @@
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
                         $inicd = $newcd['data']['count_down'];
-                        $pglulg = 30;
+                        $pglulg = 10;
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
                         echo $kuning.$bold."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
                         echo $merah."[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
                         echo $normal."---------------------------------------------\n\n";
+                        echo $kuning."Memeriksa Chest  \n".$t;
+                        sleep(5);
                         echo $kuning."Mulai Claim Dalam: \n".$t;
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
