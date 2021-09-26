@@ -395,8 +395,8 @@
                     echo $hijau."Berhasil Claim Chest \n".$t;
                     exit();
                 }else{
-                    echo $merah."Gagal Claim Chest \n".$t;
-                    echo $kuning."Alasan : ".$merah.$claim['msg'].$t;
+                    echo $bold.$merah."Gagal Claim Chest \n".$t;
+                    echo "Alasan : ".$normal.$claim['msg'].$t."\n";
                     exit();
                 }
             }
