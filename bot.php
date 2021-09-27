@@ -41,16 +41,20 @@
 
     $id = generateRandomString();
     echo "---------------------------------------------\n";
-    echo $hijau."Serial ID : ".$t.$id."\n";
+    echo $hijau."Sebelum Menggunakan Bot, Silahkan Generate Key-nya\n".$t;
+    echo $hijau."Serial ID    : ".$t.$id."\n";
+     echo $biru."Generate Key : http://google.com \n".$t;
     echo "---------------------------------------------\n";
-    $cekserial = readline("Serial Key : \n");
-
+    $cekserial = readline($biru."Serial Key : \n".$t);
     if($cekserial != md5($id)){
-        echo "Serial Key Salah";
+        echo $merah."Serial Key Salah \n".$t;
         exit();
     }
+    echo "---------------------------------------------\n";
+    echo $hijau."Serial Key Terverifikasi".$t;
 
     //$timestamp = "timeStamp=1632546383&apiSign=4FC7D956D8E33D81DA3BDB285C370F57";
+    echo "---------------------------------------------\n";
     $timestamp = readline($bold.$kuning."Masukkan Request Body 1 : ".$normal.$t);
     //Fungsi
     function get($url){
