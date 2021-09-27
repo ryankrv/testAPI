@@ -41,11 +41,11 @@
 
     $id = generateRandomString();
     echo "---------------------------------------------\n";
-    echo $hijau."Sebelum Menggunakan Bot, Silahkan Generate Key-nya\n".$t;
+    echo $kuning.$bold."Sebelum Menggunakan Bot, Silahkan Generate Key-nya\n".$normal.$t;
     echo $hijau."Serial ID    : ".$t.$id."\n";
-     echo $biru."Generate Key : http://google.com \n".$t;
+    echo $hijau."Generate Key : ".$t."http://google.com \n";
     echo "---------------------------------------------\n";
-    $cekserial = readline($biru."Serial Key : \n".$t);
+    $cekserial = readline($biru."Masukan Serial Key : \n".$t);
     if($cekserial != md5($id)){
         echo $merah."Serial Key Salah \n".$t;
         exit();
