@@ -8,7 +8,7 @@
     $bold = "\e[1m";
     $normal = "\e[0m";
     $biru = "\e[34m";
-    
+    date_default_timezone_set('Asia/Jakarta');
 
     //Header 
     echo $kuning.
@@ -323,7 +323,7 @@
                         $cdnew = countchest($wak);
                         $newcd = json_decode($cdnew, TRUE);
                         $inicd = $newcd['data']['count_down'];
-                        $pglulg = 13;
+                        $pglulg = 11;
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
@@ -333,6 +333,7 @@
 
                         echo $kuning."Memeriksa Chest  \n".$t;
                         sleep(5);
+                        echo $biru.'['.date('d-M-Y H:i:s').'] '.$hijuan.'['.$sisawaktu.' Detik] ';
                         echo $kuning."Mulai Claim Dalam: \n".$t;
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
@@ -344,7 +345,6 @@
                                     $newcd1 = json_decode($cdnew1, TRUE);
                                     if($newcd1['status'] != 1){
                                         echo $bold.$merah."\nGagal Claim Chest\n".$normal.$t;
-                                        echo "Silahkan Ganti Request Body 1\n";
                                         echo "Status : ".$newcd1['msg']."\n";
                                         exit();
                                     }
@@ -368,7 +368,7 @@
                                 }
                             }
                             */
-                            echo $bold.$hijau."\nMencoba Meng-Claim Chest : \n".$normal.$t;
+                            echo $bold.$hijau."\n\nMencoba Meng-Claim Chest : \n".$normal.$t;
                             sleep(5);
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
@@ -379,7 +379,7 @@
                             }
                             else{
                                 echo $hijau."Berhasil Claim Chest\n".$t;
-                                echo $kuning."Mulai Claim Dalam : \n".$t;
+                                echo $kuning."Mulai Claim Dalam : \n\n".$t;
                             }
                             sleep(10);
                             $cdnew2 = countchest($wak);
