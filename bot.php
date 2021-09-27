@@ -204,7 +204,7 @@
     {
         $numNewLines = substr_count($str, "\n");
         echo chr(27) . "[0G"; // Set cursor to first column
-        echo $str;
+        echo $str . " Detik     ";
     }
     
 
@@ -257,10 +257,13 @@
                         if($bykces != 0){
                             $totalces = $bykces;
                             $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t."\n");
-                            $bukces = bukachest($bchest, $rebod);
-                            $openchest = json_decode($bukces, TRUE);
-                            echo "Membuka Chest Dalam : ";
+                            
                             while($totalces != 0){
+                         
+                                echo "Membuka Chest Dalam : ";
+                                sleep(5);
+                                $bukces = bukachest($bchest, $rebod);
+                                $openchest = json_decode($bukces, TRUE);
                                 for($waktu = 5; $waktu > 0; $waktu--){
                                     echo $waktu;
                                     sleep(1);
@@ -270,15 +273,22 @@
                                     }
                                 }
                                 if($openchest['status'] != 1){
-                                    echo $merah."Tidak Ada Chest Yang Tersedia \n".$t;
+                                    echo $merah."Gagal Membuka Chest \n".$t;
+                                    echo "Status : ".$openchest['msg']."\n";
                                     exit();
                                 }
                                 else{
                                     echo " + ".$openchest['data']['num']."\n";
-                                    sleep(10);
+                                    sleep(5);
                                     $ceklagi = cekchest($chest);
                                     $chstot1 =  json_decode($ceklagi, TRUE);
+                                    if($chstot1['status'] != 1){
+                                        echo $merah."Gagal Membuka Chest \n".$t;
+                                        echo "Status : ".$chstot1['msg']."\n";
+                                        exit();
+                                    }
                                     $totalces = $chstot1['data']['chest_num'];
+                                    
                                 }
                             }
                             
@@ -305,7 +315,7 @@
                 }
                 else{
                     echo $biru."[*] Memeriksa Ketersedian Chest \n";
-                    echo "Total Chest Terklaim : ".$hijau. $cd['data']['total'].$t."\n";
+                    echo "Total Chest Terklaim Hari Ini : ".$hijau.($cd['data']['total']-1).$t."\n";
                     echo "---------------------------------------------\n";
                     $cdstat = $cd['status'];
                     sleep(5);
@@ -317,10 +327,10 @@
                         $cekwaktu = 0;
                         $sisawaktu = $inicd;
                         $sisa = $newcd['data']['total'];
-                        echo $kuning."[!] Jika Waktu Tunggu Lebih Awal Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim). Silahkan Gunakan Force Claim\n";
-                        echo $merah."[!] Jika Ada Penambahan Angka 0 (Terlihat Seperti Di blok) Pada Perubahan CountDown, biarkan saja karena Itu Bug, Angka yang benar berada disebelah kiri dari 0 tadi\n".$t;
-                        echo $biru."[!] Claim Akan Berhenti jika total detik semua claim lebih dari 500 (Limit Request Dari Server Go Novel). Jadi Cari Request Body Baru\n".$t;
+                        echo $kuning."[!] Jika Waktu Tunggu Awal Lebh Dari 500 Detik, Nonaktifkan Saja Botnya. Karena Request Body 1 Akan Expire (Jadi Gagal Claim)\n";
+                        echo $biru."[!] Claim Akan Berhenti jika total detik semua claim lebih dari 500  (Limit Request Dari Server Go Novel). Jadi Cari Request Body Baru\n".$t;
                         echo $normal."---------------------------------------------\n\n";
+
                         echo $kuning."Memeriksa Chest  \n".$t;
                         sleep(5);
                         echo $kuning."Mulai Claim Dalam: \n".$t;
@@ -358,22 +368,27 @@
                                 }
                             }
                             */
-                            echo $bold.$hijau."\nMencoba Mengclaim Chest : \n".$normal.$t;
+                            echo $bold.$hijau."\nMencoba Meng-Claim Chest : \n".$normal.$t;
                             sleep(5);
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
                             if($claim['status'] != 1){
-                                echo $bold.$merah."\nGagal Claim Chest\n".$normal.$t;
+                                echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
                                 echo "Status : ".$claim['msg'];
                                 exit();
                             }
                             else{
-                                echo $hijau."\nBerhasil Claim Chest\n".$t;
+                                echo $hijau."Berhasil Claim Chest\n".$t;
                                 echo $kuning."Mulai Claim Dalam : \n".$t;
                             }
                             sleep(10);
                             $cdnew2 = countchest($wak);
                             $newcd2 = json_decode($cdnew2, TRUE);
+                            if($newcd2['status'] != 1){
+                                echo $bold.$merah."\nGagal Claim Chest\n".$normal.$t;
+                                echo "Status : ".$newcd2['msg'];
+                                exit();
+                            }
                             $cdstat = $newcd2['status'];
                             $cekwaktu = 0;
                             $sisawaktu = $newcd2['data']['count_down'];
@@ -384,10 +399,13 @@
             }
             if($pilihan == 3){
                 echo $hijau.$bold."Metode Force Claim Chest \n".$t.$normal;
+                /*
                 echo $kuning.$bold."[!] Metode Ini Berguna Agak Kita Tidak Perlu Membaca Di Go Novel\n".$t.$normal;
                 echo $kuning.$bold."[!] Kapan Menggunakan Metode Ini?\n".$t.$normal;
                 echo "[1] Saat Count Down Claim lebih Dari 500 Detik\n";
                 echo "[2] Sesuaikan Jarak Waktu Force Claim Dengan Waktu Cek (Misal Saat Cek Claim ke-2 ternyata Muncul 800 Detik( 13 Menitan)) Jadi Kita Barus Bisa Sukses Force Claim 13 Menit Kedepan. Jangan Gunakan Auto Claim Karena Tidak Langsung Claim (Harus Nunggu 13 Menit Dlu, Keburu Expire Requestnya). \n";
+                
+                */ 
                 echo $normal."---------------------------------------------\n\n";
                 $ccss = ccs($cc);
                 $claim = json_decode($ccss, TRUE);
