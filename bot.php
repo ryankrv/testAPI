@@ -34,9 +34,9 @@
 
     
     echo 
-    $merah.$bold."Disclaimer: \n".$normal.$t.
+    $merah.$bold."Catatan: \n".$normal.$t.
     "- Resiko Di Tanggung Sendiri \n".
-    "- Menggunaka Bot Sama Saja Meggunakan Cara Ilegal \n".
+    "- Bot Merupakan Program Ilegal \n".
     "\n";
 
     $id = generateRandomString();
@@ -51,7 +51,7 @@
         exit();
     }
     echo "---------------------------------------------\n";
-    echo $hijau."Serial Key Terverifikasi".$t;
+    echo $hijau."Serial Key Terverifikasi\n".$t;
 
     //$timestamp = "timeStamp=1632546383&apiSign=4FC7D956D8E33D81DA3BDB285C370F57";
     echo "---------------------------------------------\n";
