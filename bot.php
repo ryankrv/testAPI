@@ -39,7 +39,7 @@
     "- Menggunaka Bot Sama Saja Meggunakan Cara Ilegal \n".
     "\n";
 
-    $id = GlobalGenerateRandomString();
+    $id = generateRandomString();
     echo "---------------------------------------------\n";
     echo $hijau."Serial ID : ".$t.$id."\n";
     echo "---------------------------------------------\n";
