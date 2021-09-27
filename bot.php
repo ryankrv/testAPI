@@ -10,6 +10,17 @@
     $biru = "\e[34m";
     date_default_timezone_set('Asia/Jakarta');
 
+    function generateRandomString($length = 16) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+
     //Header 
     echo $kuning.
     "    ____     ____   _______ \n".
@@ -27,6 +38,18 @@
     "- Resiko Di Tanggung Sendiri \n".
     "- Menggunaka Bot Sama Saja Meggunakan Cara Ilegal \n".
     "\n";
+
+    $id = GlobalGenerateRandomString();
+    echo "---------------------------------------------\n";
+    echo $hijau."Serial ID : ".$t.$id."\n";
+    echo "---------------------------------------------\n";
+    $cekserial = readline("Serial Key : \n");
+
+    if($cekserial != md5($id)){
+        echo "Serial Key Salah";
+        exit();
+    }
+
     //$timestamp = "timeStamp=1632546383&apiSign=4FC7D956D8E33D81DA3BDB285C370F57";
     $timestamp = readline($bold.$kuning."Masukkan Request Body 1 : ".$normal.$t);
     //Fungsi
