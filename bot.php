@@ -331,10 +331,10 @@
                         echo $biru."[!] Claim Akan Berhenti jika total detik semua claim lebih dari 500  (Limit Request Dari Server Go Novel). Jadi Cari Request Body Baru\n".$t;
                         echo $normal."---------------------------------------------\n\n";
 
-                        echo $kuning."Memeriksa Chest  \n".$t;
+                        echo $bold.$kuning."Memeriksa Chest  \n".$normal.$t;
                         sleep(5);
-                        echo $biru.'['.date('H:i:s').' WIB] '.$hijau.'['.$sisawaktu.' Detik] ';
-                        echo $kuning."Mulai Claim Dalam: \n".$t;
+                        echo $biru.'['.date('H:i:s').' WIB]'.$hijau.'['.$sisawaktu.' Detik] ';
+                        echo "Mulai Claim Dalam: \n".$t;
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
                             for($sisawaktu; $sisawaktu > 0; $sisawaktu--){
