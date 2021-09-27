@@ -333,7 +333,7 @@
 
                         echo $bold.$kuning."Memeriksa Chest  \n".$normal.$t;
                         sleep(5);
-                        echo $biru.'['.date('H:i:s').' WIB]'.$hijau.'['.$sisawaktu.' Detik] '.$t;
+                        echo $biru.'['.date('H:i:s').' WIB]'.$hijau.'['.$sisawaktu.' Detik]'.$t;
                         echo "Mulai Claim Dalam: \n".$t;
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
