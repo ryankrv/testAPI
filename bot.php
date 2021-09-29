@@ -43,7 +43,7 @@
     echo "---------------------------------------------\n";
     echo $kuning.$bold."Sebelum Menggunakan Bot, Silahkan Generate Key-nya\n".$normal.$t;
     echo $hijau."Serial ID    : ".$t.$id."\n";
-    echo $hijau."Generate Key : ".$t."http://google.com \n";
+    echo $hijau."Generate Key : ".$t."https://semawur.com/ML5H946Lm\n";
     echo "---------------------------------------------\n";
     $cekserial = readline($biru."Masukan Serial Key : \n".$t);
     if($cekserial != md5($id)){
@@ -233,12 +233,47 @@
         echo chr(27) . "[0G"; // Set cursor to first column
         echo $str . " Detik     ";
     }
+
+
+    function ceklog($url){
+        global $uid, $token, $timestamp;
+        $ch = curl_init();
+        //set URL
+        curl_setopt($ch, CURLOPT_URL, $url.$timestamp);
+        //get Data
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+       $headers = [
+            'qr-client: android',
+            'qr-uuid: '.$uid,
+            'qr-language: 3',
+            'qr-timezone: Asia/Jakarta',
+            'qr-token: '.$token,
+            'qr-version: 1.1.6',
+            'qr-sex: 1',
+            'qr-model: POCOPHONE F1',
+            'qr-r: 0',
+            'share-stamp: ',
+            'share-text: ',
+            'Content-Type: application/x-www-form-urlencoded',
+            //'Content-Length: 61',
+            'Host: api.igonovel.com',
+            'Connection: Keep-Alive',
+            'Accept-Encoding: gzip',
+            'User-Agent: okhttp/4.9.1'
+        ];
+        
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $response_json = curl_exec($ch);
+        curl_close($ch);
+        return $response_json;
+    }
     
 
     //Requset
     $profil = 'https://api.igonovel.com/v1/me/info';
     $chest = 'https://api.igonovel.com/v112/user/get_mess_chest_num';
     $bchest = 'https://api.igonovel.com/v113/user/get_chest_rewards';
+    $sign = 'https://api.igonovel.com/v117/user/sign?';
     //count down ambil
     $wak = 'https://api.igonovel.com:443/v112/user/get_chest_info?';
     //ambil
@@ -246,12 +281,12 @@
 
     //ke server
     $prof = get($profil);
-    $getchest = cekchest($chest);
-    
     $wakk = countchest($wak);
+    $getchest1 = cekchest($chest);
+    $chstot1 =  json_decode($getchest1, TRUE);
     //
     $pr = json_decode($prof, TRUE);
-    $chstot =  json_decode($getchest, TRUE);
+    
     $cd = json_decode($wakk, TRUE);
     
 
@@ -261,9 +296,19 @@
         echo "Status Login :".$hijau." Berhasil Login"."\n".$t;
         echo "Nama Akun    : ".$pr['data']['nickname']."\n";
         echo "Jumlah Koin  : ".$pr['data']['coin']."\n";
-        echo "Sisa Chest   : ".$chstot['data']['chest_num']."\n";
+        echo "Sisa Chest   : ".$chstot1['data']['chest_num']."\n";
         echo "---------------------------------------------\n";
 
+        echo "Melakukan Absen Harian : ";
+        $loggg = ceklog($sign);
+        $hasilog = json_decode($loggg, TRUE);
+        if($hasilog['status'] == 1){
+            echo "Berhasil Melakukan Absen ".$bold.$hijau."+".$hasilog['data']['reward_coin']." Coins".$normal.$t;
+        }
+        if($hasilog['status'] != 1){
+            echo $merah.$hasilog['msg'].$t;
+        }
+        echo "\n";
         $pilih = 1;
         while($pilih == 1){
             echo $kuning.$bold."Menu Bot".$normal.$t."\n";
@@ -277,6 +322,8 @@
             echo "---------------------------------------------\n";
             if($pilihan == 1){
                 {
+                    $getchest = cekchest($chest);
+                    $chstot =  json_decode($getchest, TRUE);
                     if($chstot['status'] == 1){
                         $bykces = $chstot['data']['chest_num'];
                         $rebod = '';
@@ -284,9 +331,7 @@
                         if($bykces != 0){
                             $totalces = $bykces;
                             $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t."\n");
-                            
                             while($totalces != 0){
-                         
                                 echo "Membuka Chest Dalam : ";
                                 sleep(5);
                                 $bukces = bukachest($bchest, $rebod);
@@ -329,10 +374,11 @@
                     else{
                         echo "-------------------------------------------------------\n";
                         echo $merah."Gagal Melakukan Aksi"."\n".$t;
-                        echo "Sesi Login Berakhir, Silahkan Ganti timeStamp baru\n";
+                        echo "Status : ".$chstot['msg']."\n";
                         echo "-------------------------------------------------------\n";
                     }
                 }
+                exit();
             }
             if($pilihan == 2){
                 if($pr['status'] != 1){
@@ -406,7 +452,6 @@
                             }
                             else{
                                 echo $hijau."Berhasil Claim Chest\n".$t;
-                                echo $kuning."Mulai Claim Dalam : \n\n".$t;
                             }
                             sleep(10);
                             $cdnew2 = countchest($wak);
@@ -419,10 +464,12 @@
                             $cdstat = $newcd2['status'];
                             $cekwaktu = 0;
                             $sisawaktu = $newcd2['data']['count_down'];
-                            
+                            echo $biru.'['.date('H:i:s').' WIB]'.$hijau.'['.$sisawaktu.' Detik]'.$t;
+                            echo "Mulai Claim Dalam: \n".$t;
                         }
                     }
                 }
+                exit();
             }
             if($pilihan == 3){
                 echo $hijau.$bold."Metode Force Claim Chest \n".$t.$normal;
