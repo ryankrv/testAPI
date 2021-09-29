@@ -339,7 +339,7 @@
                             sleep(3);
                             $bukces5 = bukachest($bchest, $rebod);
                             $openchest5 = json_decode($bukces5, TRUE);
-                            if($openchest == null){
+                            if($openchest5 == null){
                                 echo $merah."Request Body 2 Tidak Valid\n".$t;
                                 exit();
                             }
