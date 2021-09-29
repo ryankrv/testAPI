@@ -303,6 +303,7 @@
         echo "---------------------------------------------\n";
 
         echo $kuning.$bold."Melakukan Absen Harian : ".$normal;
+        sleep(3);
         $loggg = ceklog($sign);
         $hasilog = json_decode($loggg, TRUE);
         if($hasilog['status'] == 1){
@@ -423,7 +424,7 @@
                         echo "Mulai Claim Dalam: \n".$t;
                         while($newcd['status'] == 1){
                             $waktu = $pglulg;
-                            for($sisawaktu; $sisawaktu > 0; $sisawaktu--){
+                            for($sisawaktu; $sisawaktu >= 0; $sisawaktu--){
                                 replaceOut($sisawaktu);
                                 $modwaktu = $sisawaktu % $pglulg;
                                 if($modwaktu == 0){
