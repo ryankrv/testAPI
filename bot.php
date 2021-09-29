@@ -55,7 +55,7 @@
 
     //$timestamp = "timeStamp=1632546383&apiSign=4FC7D956D8E33D81DA3BDB285C370F57";
     echo "---------------------------------------------\n";
-    $timestamp = readline($bold.$kuning."Masukkan Request Body 1 : ".$normal.$t);
+    $timestamp = readline($bold.$kuning."Masukan Request Body 1 : ".$normal.$t);
     //Fungsi
     function get($url){
         global $uid, $token, $timestamp;
@@ -290,7 +290,7 @@
     $cd = json_decode($wakk, TRUE);
     
     if($pr == null){
-        echo "Data Tidak Valid \n";
+        echo $bold.$red."Data Request Body 1 Tidak Valid \n".$normal.$t;
         exit();
     }
 
@@ -333,7 +333,7 @@
                         //cek jumlah chest dan siapkan Execute;
                         if($bykces != 0){
                             $totalces = $bykces;
-                            $rebod = readline($bold.$kuning."Masukkan Request Body 2 : ".$normal.$t."\n");
+                            $rebod = readline($bold.$kuning."Masukan Request Body 2 : ".$normal.$t."\n");
                             while($totalces != 0){
                                 echo "Membuka Chest Dalam : ";
                                 sleep(5);
