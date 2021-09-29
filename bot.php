@@ -318,14 +318,14 @@
         while($pilih == 1){
             echo $kuning.$bold."Menu Bot".$normal.$t."\n";
             echo 
-            "1. Auto Buka Chest \n".
-            "2. Auto Claim Chest \n".
+            "1. Auto Claim Chest \n".
+            "2. Auto Buka Chest \n".
             "3. Force Claim Chest \n".
             "4. Keluar Dari Bot \n";
             echo "---------------------------------------------\n";
             $pilihan = readline($hijau.'Ketik Nomor Menu Yang Akan Dijalankan : '.$t);
             echo "---------------------------------------------\n";
-            if($pilihan == 1){
+            if($pilihan == 2){
                 {
                     $getchest = cekchest($chest);
                     $chstot =  json_decode($getchest, TRUE);
@@ -394,7 +394,7 @@
                 }
                 exit();
             }
-            if($pilihan == 2){
+            if($pilihan == 1){
                 if($pr['status'] != 1){
                     echo $bold.$merah."Gagal Claim Chest\n".$normal.$t;
                     echo "Status : ".$pr['msg'];
@@ -455,8 +455,7 @@
                                 }
                             }
                             */
-                            replaceOut(" ");
-                            echo $bold.$biru."Mencoba Meng-Claim Chest : ".$normal.$t;
+                            echo $bold.$biru."\nMencoba Meng-Claim Chest : ".$normal.$t;
                             sleep(5);
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
