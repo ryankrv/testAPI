@@ -302,7 +302,7 @@
         echo "Sisa Chest   : ".$chstot1['data']['chest_num']."\n";
         echo "---------------------------------------------\n";
 
-        echo "Melakukan Absen Harian : ";
+        echo $kuning.$bold."Melakukan Absen Harian : ".$normal;
         $loggg = ceklog($sign);
         $hasilog = json_decode($loggg, TRUE);
         if($hasilog['status'] == 1){
@@ -312,6 +312,7 @@
             echo $merah.$hasilog['msg'].$t;
         }
         echo "\n";
+        echo "---------------------------------------------\n";
         $pilih = 1;
         while($pilih == 1){
             echo $kuning.$bold."Menu Bot".$normal.$t."\n";
@@ -334,6 +335,15 @@
                         if($bykces != 0){
                             $totalces = $bykces;
                             $rebod = readline($bold.$kuning."Masukan Request Body 2 : ".$normal.$t."\n");
+                            echo "Memeriksa Requst Body : ";
+                            sleep(3);
+                            $bukces5 = bukachest($bchest, $rebod);
+                            $openchest5 = json_decode($bukces5, TRUE);
+                            if($openchest == null){
+                                echo $merah."Request Body 2 Tidak Valid\n".$t;
+                                exit();
+                            }
+                            echo $hijau."Data Valid\n".$t;
                             while($totalces != 0){
                                 echo "Membuka Chest Dalam : ";
                                 sleep(5);
