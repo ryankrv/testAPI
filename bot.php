@@ -289,7 +289,10 @@
     
     $cd = json_decode($wakk, TRUE);
     
-
+    if($pr == null){
+        echo "Data Tidak Valid \n";
+        exit();
+    }
 
     if($pr['status'] == 1){
         echo "---------------------------------------------\n";
