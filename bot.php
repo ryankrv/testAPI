@@ -455,7 +455,8 @@
                                 }
                             }
                             */
-                            echo $bold.$hijau."\n\nMencoba Meng-Claim Chest : \n".$normal.$t;
+                            replaceOut(" ");
+                            echo $bold.$biru."Mencoba Meng-Claim Chest : ".$normal.$t;
                             sleep(5);
                             $ccss = ccs($cc);
                             $claim = json_decode($ccss, TRUE);
